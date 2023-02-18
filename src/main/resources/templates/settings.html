@@ -17,18 +17,18 @@
   <form class="w3-container w3-border w3-border-cyan" action="#" th:action="@{/salary/saveSettings}" th:object="${settings}" method="POST">
     <p>
       <label>Введите ставку подоходного налога</label>
-      <input class="w3-input w3-border"  type="number" th:field="*{taxRate}" placeholder="Введите ставку подоходного налога"  value="" min="1" max="99">
+      <input class="w3-input w3-border"  type="number" th:field="*{taxRate}" placeholder="Введите ставку подоходного налога"  value="" min="0" max="100">
       <label class="w3-red" th:if="${#fields.hasErrors('taxRate')}" th:errors="*{taxRate}">taxRate Error</label>
     <p>
       <label>В период болезни работнику начисляется (проценты)</label>
-      <input class="w3-input w3-border"  type="text" th:field="*{sickPercent}" placeholder="Введите длинный URL" value="" min="1" max="99">
+      <input class="w3-input w3-border"  type="number" th:field="*{sickPercent}" placeholder="В период болезни работнику начисляется (проценты)" value="" min="0" max="100">
       <label class="w3-red" th:if="${#fields.hasErrors('sickPercent')}" th:errors="*{sickPercent}">sickPercent Error</label>
     <p>
-      <button class="w3-btn w3-round-large" type="submit"> Сохранить </button>
+      <button class="w3-btn w3-border w3-round-large" type="submit"> Сохранить </button>
     <p>
   </form>
   <p>
-    <a class="w3-btn w3-round-large" th:href="@{/salary/main}"> Возвратиться на главную страницу</a>
+    <a class="w3-btn w3-border w3-round-large" th:href="@{/salary/main}"> Возвратиться на главную страницу</a>
   </p>
 </div>
 </body>

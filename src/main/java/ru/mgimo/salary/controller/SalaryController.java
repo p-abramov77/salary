@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.mgimo.salary.entity.SettingsEntity;
 import ru.mgimo.salary.service.SettingsServiceImpl;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 @Controller
@@ -18,6 +19,16 @@ import javax.validation.Valid;
 public class SalaryController {
     @Autowired
     private SettingsServiceImpl settingsService;
+
+    @PostConstruct
+    public void postConstruct() {
+        SettingsEntity settingsEntity = settingsService.readSettings();
+        if(settingsEntity == null) {
+            // if settings dos not exists make default settings
+            settingsEntity = new SettingsEntity(1L,13,50);
+            settingsService.saveSettings(settingsEntity);
+        }
+    }
     @GetMapping ("main")
     public String mainPage() {
         return "main";
@@ -33,9 +44,6 @@ public class SalaryController {
     @GetMapping ("settings")
     public String settings(Model model) {
         SettingsEntity settingsEntity = settingsService.readSettings();
-        if(settingsEntity == null)
-            settingsEntity = new SettingsEntity(1L,13,50);
-
         model.addAttribute("settings",settingsEntity);
         return "settings";
     }
