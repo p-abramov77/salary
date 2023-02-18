@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
@@ -15,8 +16,11 @@ public class SettingsEntity {
     @Id
     private Long id = 1L;
 
-
+    @Min(value = 0, message = "Должен быть больше или равен 0")
+    @Max(value = 100, message = "Должен быть меньше или равен 100")
     private float taxRate;
+    @Min(value = 0, message = "Должен быть больше или равен 0")
+    @Max(value = 100, message = "Должен быть меньше или равен 100")
     private float sickPercent;
 
     public float getTaxRate() {

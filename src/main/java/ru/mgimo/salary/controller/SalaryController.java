@@ -52,7 +52,7 @@ public class SalaryController {
                                BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
-            return "salary/settings";
+            return "settings";
         }
         System.out.println(settingsEntity);
         settingsService.saveSettings(settingsEntity);

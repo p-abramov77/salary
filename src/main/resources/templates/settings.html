@@ -16,12 +16,12 @@
 
   <form class="w3-container w3-border w3-border-cyan" action="#" th:action="@{/salary/saveSettings}" th:object="${settings}" method="POST">
     <p>
-      <label>Введите ставку подоходного налога</label>
-      <input class="w3-input w3-border"  type="number" th:field="*{taxRate}" placeholder="Введите ставку подоходного налога"  value="" min="0" max="100">
+      <label>Ставка подоходного налога</label>
+      <input class="w3-input w3-border"  type="number" th:field="*{taxRate}" placeholder="Введите ставку подоходного налога"  value="" >
       <label class="w3-red" th:if="${#fields.hasErrors('taxRate')}" th:errors="*{taxRate}">taxRate Error</label>
     <p>
       <label>В период болезни работнику начисляется (проценты)</label>
-      <input class="w3-input w3-border"  type="number" th:field="*{sickPercent}" placeholder="В период болезни работнику начисляется (проценты)" value="" min="0" max="100">
+      <input class="w3-input w3-border"  type="number" th:field="*{sickPercent}" placeholder="Введите процент начисления в период болезни" value="" >
       <label class="w3-red" th:if="${#fields.hasErrors('sickPercent')}" th:errors="*{sickPercent}">sickPercent Error</label>
     <p>
       <button class="w3-btn w3-border w3-round-large" type="submit"> Сохранить </button>
