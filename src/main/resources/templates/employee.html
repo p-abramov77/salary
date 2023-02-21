@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Сотрудник</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+
+<body>
+<div class="w3-container">
+    <div class="w3-container">
+        <h1>Сотрудник</h1>
+    </div>
+
+<!--    String tableNumber;-->
+<!--    String fullName;-->
+<!--    String position;-->
+<!--    float wage;-->
+<!--    String maritalStatus;-->
+<!--    int childAmount;-->
+<!--    Date hireDate;-->
+<!--    Date resignDate;-->
+
+    <form class="w3-container w3-border w3-border-cyan" action="#" th:action="@{/salary/saveEmployee}" th:object="${employee}" method="POST">
+        <input type="hidden" th:field="*{id}" />
+        <p>
+            <label>Табельный номер</label>
+            <input class="w3-input w3-border"  type="text" th:field="*{tableNumber}" placeholder="Введите табельный номер"  value="" >
+            <label class="w3-red" th:if="${#fields.hasErrors('tableNumber')}" th:errors="*{tableNumber}">tableNumber Error</label>
+        <p>
+            <label>Полное имя</label>
+            <input class="w3-input w3-border"  type="text" th:field="*{fullName}" placeholder="Введите полное имя"  value="" >
+            <label class="w3-red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">fullName Error</label>
+        <p>
+            <label>Должность</label>
+            <input class="w3-input w3-border"  type="text" th:field="*{position}" placeholder="Введите должность"  value="" >
+            <label class="w3-red" th:if="${#fields.hasErrors('position')}" th:errors="*{position}">position Error</label>
+        <p>
+            <label>Оклад</label>
+            <input class="w3-input w3-border"  type="number" th:field="*{wage}" placeholder="Введите оклад" value="" >
+            <label class="w3-red" th:if="${#fields.hasErrors('wage')}" th:errors="*{wage}">wage Error</label>
+        <p>
+            <label>Семейное положение</label>
+            <input class="w3-input w3-border"  type="text" th:field="*{maritalStatus}" placeholder="Введите семейное положение" value="" >
+            <label class="w3-red" th:if="${#fields.hasErrors('maritalStatus')}" th:errors="*{maritalStatus}">maritalStatus Error</label>
+        <p>
+            <label>Количество детей</label>
+            <input class="w3-input w3-border"  type="number" th:field="*{childAmount}" placeholder="Введите количество детей" value="" >
+            <label class="w3-red" th:if="${#fields.hasErrors('childAmount')}" th:errors="*{childAmount}">childAmount Error</label>
+        <p>
+            <label>Дата приема на работу</label>
+            <input class="w3-input w3-border"  type="date" th:field="*{hireDate}" placeholder="Введите дату приема на работу" value="" >
+            <label class="w3-red" th:if="${#fields.hasErrors('hireDate')}" th:errors="*{hireDate}">hireDate Error</label>
+        <p>
+            <button class="w3-btn w3-border w3-round-large" type="submit"> Сохранить </button>
+        <p>
+    </form>
+    <p>
+        <a class="w3-btn w3-border w3-round-large" th:href="@{/salary/employees}"> Вернуться к списку сотрудников</a>
+    </p>
+</div>
+</body>
+
+</html>
