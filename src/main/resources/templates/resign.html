@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Сотрудник</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+
+<body>
+<div class="w3-container">
+  <div class="w3-container">
+    <h1>Сотрудник</h1>
+  </div>
+
+  <form class="w3-container w3-border w3-border-cyan" action="#" th:action="@{/salary/saveResignEmployee}" th:object="${employee}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    <input type="hidden" th:field="*{tableNumber}"/>
+    <input type="hidden" th:field="*{fullName}" />
+    <input type="hidden" th:field="*{position}" />
+    <input type="hidden" th:field="*{wage}"/>
+    <input type="hidden" th:field="*{maritalStatus}"/>
+    <input type="hidden" th:field="*{childAmount}" />
+    <input type="hidden" th:field="*{hireDate}" />
+    <p>
+      <label>Дата увольнения</label>
+      <input class="w3-input w3-border"  type="date" th:field="*{resignDate}" placeholder="Введите дату увольнения" value="" >
+      <label class="w3-red" th:if="${#fields.hasErrors('resignDate')}" th:errors="*{resignDate}">resignDate Error</label>
+    <p>
+      <button class="w3-btn w3-border w3-round-large" type="submit"> Сохранить </button>
+    <p>
+  </form>
+  <p>
+    <a class="w3-btn w3-border w3-round-large" th:href="@{/salary/employees}"> Вернуться к списку сотрудников</a>
+  </p>
+</div>
+</body>
+
+</html>

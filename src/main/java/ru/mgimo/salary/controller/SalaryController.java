@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.mgimo.salary.entity.AbsenceEntity;
 import ru.mgimo.salary.entity.EmployeeEntity;
 import ru.mgimo.salary.entity.SettingsEntity;
+import ru.mgimo.salary.service.AbsenceServiceImp;
 import ru.mgimo.salary.service.EmployeeServiceImpl;
 import ru.mgimo.salary.service.SettingsServiceImpl;
 
@@ -26,6 +28,8 @@ public class SalaryController {
     @Autowired
     private EmployeeServiceImpl employeeService;
 
+    @Autowired
+    private AbsenceServiceImp absenceService;
     @PostConstruct
     public void postConstruct() {
         SettingsEntity settingsEntity = settingsService.readSettings();
@@ -63,7 +67,6 @@ public class SalaryController {
         if(bindingResult.hasErrors()) {
             return "settings";
         }
-        System.out.println(settingsEntity);
         settingsService.saveSettings(settingsEntity);
 
         return "redirect:/salary/main";
@@ -89,9 +92,69 @@ public class SalaryController {
     @GetMapping("editEmployee/{id}")
     public String editEmployee(Model model, @PathVariable(value = "id") long id) {
         EmployeeEntity employeeEntity = employeeService.getEmployeeById(id);
-        System.out.println("read : " + employeeEntity);
         model.addAttribute("employee", employeeEntity);
         return "employee";
     }
+    @GetMapping("resignEmployee/{id}")
+    public String resignEmployee(Model model, @PathVariable(value = "id") long id) {
+        EmployeeEntity employeeEntity = employeeService.getEmployeeById(id);
+        model.addAttribute("employee", employeeEntity);
+        return "resign";
+    }
+    @PostMapping("saveResignEmployee")
+    public String saveResignEmployee(@ModelAttribute("employee") @Valid EmployeeEntity employeeEntity,
+                               BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "resign";
+        }
+        employeeService.save(employeeEntity);
 
+        return "redirect:/salary/employees";
+    }
+    @GetMapping("absenceDays/{id}")
+    public String absenceDays(Model model, @PathVariable(value = "id") long employeeId) {
+        List<AbsenceEntity> absenceEntityList = absenceService.listAbsence(employeeId);
+        String fullName = employeeService.getEmployeeById(employeeId).getFullName();
+        model.addAttribute("absences", absenceEntityList);
+        model.addAttribute("name", fullName);
+        model.addAttribute("id", employeeId);
+        return "absences";
+    }
+    @GetMapping("newAbsence/{id}")
+    public String newAbsence(Model model, @PathVariable(value = "id") long employeeId) {
+        AbsenceEntity absenceEntity = new AbsenceEntity();
+        absenceEntity.setEmployeeId(employeeId);
+        String fullName = employeeService.getEmployeeById(employeeId).getFullName();
+        model.addAttribute("name", fullName);
+        model.addAttribute("absence", absenceEntity);
+        return "absence";
+    }
+    @PostMapping("saveAbsence")
+    public String saveAbsence(@ModelAttribute("absence") @Valid AbsenceEntity absenceEntity,
+                                     BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "absence";
+        }
+        absenceService.save(absenceEntity);
+        // Показать пропущенные дни этого работниа
+        return "redirect:/salary/absenceDays/" + absenceEntity.getEmployeeId() ;
+    }
+    @GetMapping("editAbsence/{id}")
+    public String editAbsence(Model model, @PathVariable(value = "id") long id) {
+        AbsenceEntity absenceEntity = absenceService.getAbsence(id);
+        if (absenceEntity == null)
+            return "absences";
+        String fullName = employeeService.getEmployeeById(absenceEntity.getEmployeeId()).getFullName();
+        model.addAttribute("name", fullName);
+        model.addAttribute("absence", absenceEntity);
+        return "absence";
+    }
+
+        @GetMapping("deleteAbsence/{id}")
+    public String deleteAbsence(Model model, @PathVariable(value = "id") long id) {
+        AbsenceEntity absenceEntity = absenceService.getAbsence(id);
+        absenceService.delete(id);
+
+        return "redirect:/salary/absenceDays/" + absenceEntity.getEmployeeId();
+     }
 }

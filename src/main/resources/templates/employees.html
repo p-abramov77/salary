@@ -15,10 +15,8 @@
   <a class="w3-button w3-gray w3-round-large" href="main">Вернуться на главную страницу</a>
 
   <p>
-    <a id="newEmployee" class="w3-btn w3-round-large"> Прием на работу </a>
-    <script>
-        newEmployee.onclick = function() { window.location.href = "newEmployee"; };
-    </script>
+    <a id="newEmployee" class="w3-btn w3-border w3-round-large" href="/salary/newEmployee"> Прием на работу </a>
+
 
 
   <table border="1" class = "w3-table-all w3-bordered w3-striped w3-border test w3-hoverable">
@@ -57,6 +55,7 @@
       <td th:text="${employee.hireDate}"></td>
       <td th:text="${employee.resignDate}"></td>
       <td><a th:href="@{editEmployee/{id}(id=${employee.id})}" class="w3-btn w3-border w3-round-large ">Изменить</a></td>
+      <td><a th:href="@{absenceDays/{id}(id=${employee.id})}" class="w3-btn w3-border w3-round-large ">Пропущенные дни</a></td>
       <td><a th:href="@{resignEmployee/{id}(id=${employee.id})}" class="w3-btn w3-border w3-round-large">Уволить</a></td>
     </tr>
     </tbody>

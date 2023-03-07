@@ -21,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public List<EmployeeEntity> listEmployee(String name) {
-        return employeeRepo.findAllByFullNameContaining(name);
+        return employeeRepo.findAllByFullNameContainingOrderByFullName(name);
     }
 
     @Override
