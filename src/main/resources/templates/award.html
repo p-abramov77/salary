@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Надбавка</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+
+<body>
+<div class="w3-container">
+  <div class="w3-container">
+    <h1>Надбавка</h1>
+  </div>
+
+  <!--  Long id;-->
+  <!--  long employeeId;-->
+  <!--  Date startDate;-->
+  <!--  Date finishDate;-->
+  <!--  boolean paid;-->
+  <!--  String comment;-->
+  <p>
+    <label>Сотрудник</label>
+    <label class="w3-input"  type="text" th:text="${name}">
+
+
+  <form class="w3-container w3-border w3-border-cyan" action="#" th:action="@{/salary/saveAward}" th:object="${award}" method="POST">
+    <input type="hidden" th:field="*{id}" />
+    <input type="hidden" th:field="*{employeeId}" />
+
+    <p>
+      <label>Дата выплаты</label>
+      <input class="w3-input w3-border"  type="date" th:field="*{date}" placeholder="Введите дату выплаты" value="" >
+      <label class="w3-red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">date Error</label>
+    <p>
+      <label>Сумма</label>
+      <input class="w3-input w3-border"  type="number" th:field="*{amount}" placeholder="Введите сумму" value="" >
+      <label class="w3-red" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">amount Error</label>
+    <p>
+      <label>Введите комментарий</label>
+      <input class="w3-input w3-border"  type="text" th:field="*{comment}" placeholder="Введите комментарий" value="" >
+      <label class="w3-red" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">comment Error</label>
+    <p>
+      <button class="w3-btn w3-border w3-round-large" type="submit"> Сохранить </button>
+    <p>
+  </form>
+  <p>
+    <a class="w3-btn w3-border w3-round-large" th:href="@{/salary/employees}"> Вернуться к списку сотрудников</a>
+  </p>
+</div>
+</body>
+
+</html>
