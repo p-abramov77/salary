@@ -107,6 +107,14 @@ public class EmployeeEntity {
         this.hireDate = Date.valueOf(date);
     }
 
+    public List<AbsenceEntity> getAbsenceEntityList() {
+        return absenceEntityList;
+    }
+
+    public List<AwardEntity> getAwardEntityList() {
+        return awardEntityList;
+    }
+
     public String toString() {
         return Long.toString(id) + " " + fullName + " " + position;
     }

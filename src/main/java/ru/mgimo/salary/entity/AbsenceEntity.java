@@ -62,4 +62,7 @@ public class AbsenceEntity {
     public void setComment(String comment) {
         this.comment = comment;
     }
+    public String toString() {
+        return "absend "+ Long.toString(id) + " " + startDate + " " + finishDate;
+    }
 }
