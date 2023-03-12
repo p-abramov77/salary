@@ -17,19 +17,30 @@ public class AwardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    long employeeId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "employeeId", nullable = false)
+    private EmployeeEntity employee;
+
+    public EmployeeEntity getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(EmployeeEntity employee) {
+        this.employee = employee;
+    }
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date date;
     @Min(value = 0, message = "Должен быть больше 0")
     float amount;
     String comment;
 
-    public long getEmployeeId() {
-        return employeeId;
+    public EmployeeEntity getEmployeeEntity() {
+        return employee;
     }
 
-    public void setEmployeeId(long employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployeeEntity(EmployeeEntity employeeEntity) {
+        this.employee = employeeEntity;
     }
 
     public Date getDate() {

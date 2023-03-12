@@ -3,16 +3,19 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Сотрудник</title>
+  <title>Увольнение</title>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 </head>
 
 <body>
 <div class="w3-container">
-  <div class="w3-container">
-    <h1>Сотрудник</h1>
-  </div>
+
+  <p>
+  <h1>
+    <span>Сотрудник</span>
+    <span class="w3-input"  type="text" th:text="${name}"></span>
+  </h1>
 
   <form class="w3-container w3-border w3-border-cyan" action="#" th:action="@{/salary/saveResignEmployee}" th:object="${employee}" method="POST">
     <input type="hidden" th:field="*{id}" />

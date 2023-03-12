@@ -1,6 +1,5 @@
 package ru.mgimo.salary.controller;
 
-import org.apache.tomcat.util.buf.UEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -102,6 +101,7 @@ public class SalaryController {
     @GetMapping("resignEmployee/{id}")
     public String resignEmployee(Model model, @PathVariable(value = "id") long id) {
         EmployeeEntity employeeEntity = employeeService.getEmployeeById(id);
+        model.addAttribute("name", employeeEntity.getFullName());
         model.addAttribute("employee", employeeEntity);
         return "resign";
     }
@@ -127,8 +127,8 @@ public class SalaryController {
     @GetMapping("newAbsence/{id}")
     public String newAbsence(Model model, @PathVariable(value = "id") long employeeId) {
         AbsenceEntity absenceEntity = new AbsenceEntity();
-        absenceEntity.setEmployeeId(employeeId);
-        String fullName = employeeService.getEmployeeById(employeeId).getFullName();
+        absenceEntity.setEmployee(employeeService.getEmployeeById(employeeId));
+        String fullName = absenceEntity.getEmployee().getFullName();
         model.addAttribute("name", fullName);
         model.addAttribute("absence", absenceEntity);
         return "absence";
@@ -141,14 +141,14 @@ public class SalaryController {
         }
         absenceService.save(absenceEntity);
         // Показать пропущенные дни этого работниа
-        return "redirect:/salary/absenceDays/" + absenceEntity.getEmployeeId() ;
+        return "redirect:/salary/absenceDays/" + absenceEntity.getEmployee().getId() ;
     }
     @GetMapping("editAbsence/{id}")
     public String editAbsence(Model model, @PathVariable(value = "id") long id) {
         AbsenceEntity absenceEntity = absenceService.getAbsence(id);
         if (absenceEntity == null)
             return "absences";
-        String fullName = employeeService.getEmployeeById(absenceEntity.getEmployeeId()).getFullName();
+        String fullName = employeeService.getEmployeeById(absenceEntity.getEmployee().getId()).getFullName();
         model.addAttribute("name", fullName);
         model.addAttribute("absence", absenceEntity);
         return "absence";
@@ -159,7 +159,7 @@ public class SalaryController {
         AbsenceEntity absenceEntity = absenceService.getAbsence(id);
         absenceService.delete(id);
 
-        return "redirect:/salary/absenceDays/" + absenceEntity.getEmployeeId();
+        return "redirect:/salary/absenceDays/" + absenceEntity.getEmployee().getId();
      }
 
     @GetMapping("awards/{id}")
@@ -174,8 +174,9 @@ public class SalaryController {
     @GetMapping("newAward/{id}")
     public String newAward(Model model, @PathVariable(value = "id") long employeeId) {
         AwardEntity awardEntity = new AwardEntity();
-        awardEntity.setEmployeeId(employeeId);
-        String fullName = employeeService.getEmployeeById(employeeId).getFullName();
+        EmployeeEntity employeeEntity = employeeService.getEmployeeById(employeeId);
+        awardEntity.setEmployeeEntity(employeeEntity);
+        String fullName = awardEntity.getEmployee().getFullName();
         model.addAttribute("name", fullName);
         model.addAttribute("award", awardEntity);
         return "award";
@@ -187,14 +188,14 @@ public class SalaryController {
             return "award";
         }
         awardService.save(awardEntity);
-        return "redirect:/salary/awards/" + awardEntity.getEmployeeId() ;
+        return "redirect:/salary/awards/" + awardEntity.getEmployeeEntity().getId() ;
     }
     @GetMapping("editAward/{id}")
     public String editAward(Model model, @PathVariable(value = "id") long id) {
         AwardEntity awardEntity = awardService.getAward(id);
         if (awardEntity == null)
             return "awards";
-        String fullName = employeeService.getEmployeeById(awardEntity.getEmployeeId()).getFullName();
+        String fullName = awardEntity.getEmployeeEntity().getFullName();
         model.addAttribute("name", fullName);
         model.addAttribute("award", awardEntity);
         return "award";
@@ -205,6 +206,6 @@ public class SalaryController {
         AwardEntity awardEntity = awardService.getAward(id);
         awardService.delete(id);
 
-        return "redirect:/salary/awards/" + awardEntity.getEmployeeId();
+        return "redirect:/salary/awards/" + awardEntity.getEmployeeEntity().getId();
     }
 }

@@ -19,7 +19,7 @@ public class AwardServiceImp implements AwardService {
 
     @Override
     public List<AwardEntity> listAwards(long employeeId) {
-        return awardRepo.findAllByEmployeeIdOrderByDate(employeeId);
+        return awardRepo.findByEmployeeIdOrderByDate(employeeId);
     }
 
     @Override

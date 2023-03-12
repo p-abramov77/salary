@@ -22,12 +22,12 @@
 <!--  String comment;-->
   <p>
     <label>Сотрудник</label>
-    <label class="w3-input"  type="text" th:text="${name}">
+    <label class="w3-input"  type="text" th:text="${name}"></label>
 
 
   <form class="w3-container w3-border w3-border-cyan" action="#" th:action="@{/salary/saveAbsence}" th:object="${absence}" method="POST">
     <input type="hidden" th:field="*{id}" />
-    <input type="hidden" th:field="*{employeeId}" />
+    <input type="hidden" th:field="*{employee}" />
 
     <p>
       <label>Начало периода отсутствия</label>
@@ -50,7 +50,7 @@
     <p>
   </form>
   <p>
-    <a class="w3-btn w3-border w3-round-large" th:href="@{/salary/employees}"> Вернуться к списку сотрудников</a>
+    <a class="w3-btn w3-border w3-round-large" th:href="@{/salary/awards/{id}(id=${absence.employee.id})}"> Вернуться к пропущенным дням</a>
   </p>
 </div>
 </body>

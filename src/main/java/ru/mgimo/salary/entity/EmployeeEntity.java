@@ -7,6 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -15,6 +16,10 @@ public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<AbsenceEntity> absenceEntityList;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<AwardEntity> awardEntityList;
     @NotEmpty(message = "Не может быть пустым")
     @Size(min = 3, max = 10, message = "Длина строки должна быть от 3 до 10 символов")
     String tableNumber;

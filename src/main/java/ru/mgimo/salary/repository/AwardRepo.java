@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface AwardRepo extends JpaRepository<AwardEntity, Long> {
-    List<AwardEntity> findAllByEmployeeIdOrderByDate(long employeeId);
+    List<AwardEntity> findByEmployeeIdOrderByDate(long employeeId);
 
 }

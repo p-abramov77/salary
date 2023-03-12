@@ -13,7 +13,9 @@ public class AbsenceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    long employeeId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "employeeId", nullable = false)
+    private EmployeeEntity employee;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -21,8 +23,12 @@ public class AbsenceEntity {
     boolean paid;
     String comment;
 
-    public long getEmployeeId() {
-        return employeeId;
+    public EmployeeEntity getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(EmployeeEntity employee) {
+        this.employee = employee;
     }
 
     public Date getStartDate() {
@@ -39,10 +45,6 @@ public class AbsenceEntity {
 
     public String getComment() {
         return comment;
-    }
-
-    public void setEmployeeId(long employeeId) {
-        this.employeeId = employeeId;
     }
 
     public void setStartDate(Date startDate) {
