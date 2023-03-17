@@ -54,11 +54,11 @@
             <input class="w3-input w3-border"  type="date" th:field="*{hireDate}" placeholder="Введите дату приема на работу" value="" >
             <label class="w3-red" th:if="${#fields.hasErrors('hireDate')}" th:errors="*{hireDate}">hireDate Error</label>
         <p>
-            <button class="w3-btn w3-border w3-round-large" type="submit"> Сохранить </button>
+            <button class="w3-btn w3-indigo w3-border w3-round-large" type="submit"> Сохранить </button>
         <p>
     </form>
     <p>
-        <a class="w3-btn w3-border w3-round-large" th:href="@{/salary/employees}"> Вернуться к списку сотрудников</a>
+        <a class="w3-btn w3-blue w3-border w3-round-large" th:href="@{/salary/employees}"> Не сохранять. Вернуться к списку сотрудников</a>
     </p>
 </div>
 </body>

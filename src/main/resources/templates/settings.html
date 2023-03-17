@@ -24,11 +24,11 @@
       <input class="w3-input w3-border"  type="number" th:field="*{sickPercent}" placeholder="Введите процент начисления в период болезни" value="" >
       <label class="w3-red" th:if="${#fields.hasErrors('sickPercent')}" th:errors="*{sickPercent}">sickPercent Error</label>
     <p>
-      <button class="w3-btn w3-border w3-round-large" type="submit"> Сохранить </button>
+      <button class="w3-btn w3-indigo w3-border w3-round-large" type="submit"> Сохранить </button>
     <p>
   </form>
   <p>
-    <a class="w3-btn w3-border w3-round-large" th:href="@{/salary/main}"> Возвратиться на главную страницу</a>
+    <a class="w3-btn w3-blue w3-border w3-round-large" th:href="@{/salary/main}"> Возвратиться на главную страницу</a>
   </p>
 </div>
 </body>

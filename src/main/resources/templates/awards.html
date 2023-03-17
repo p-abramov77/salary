@@ -13,10 +13,10 @@
     </div>
 
 
-    <a class="w3-button w3-gray w3-round-large" href="/salary/employees">Вернуться к списку сотрудников</a>
+    <a class="w3-btn w3-blue w3-round-large" href="/salary/employees">Вернуться к списку сотрудников</a>
 
     <p>
-        <a class="w3-btn w3-border w3-round-large" th:href="@{'/salary/newAward/'+${id}}" > Добавить надбавку </a>
+        <a class="w3-btn w3-teal w3-border w3-round-large" th:href="@{'/salary/newAward/'+${id}}" > Добавить надбавку </a>
         <!--    <script>-->
         <!--        newAbsence.onclick = function() { window.location.href = "newAbsence/" + document.getElementByName("id").text  ; };-->
         <!--    </script>-->
@@ -52,8 +52,8 @@
             <td th:text="${#dates.format(award.date,'dd-MM-yyyy')}"></td>
             <td th:text="${award.amount}"></td>
             <td th:text="${award.comment}"></td>
-            <td><a th:href="@{/salary/editAward/{id}(id=${award.id})}" class="w3-btn w3-border w3-round-large ">Изменить</a></td>
-            <td><a th:href="@{/salary/deleteAward/{id}(id=${award.id})}" class="w3-btn w3-border w3-round-large">Удалить</a></td>
+            <td><a th:href="@{/salary/editAward/{id}(id=${award.id})}" class="w3-btn w3-indigo w3-border w3-round-large ">Изменить</a></td>
+            <td><a th:href="@{/salary/deleteAward/{id}(id=${award.id})}" class="w3-btn w3-indigo w3-border w3-round-large">Удалить</a></td>
         </tr>
         </tbody>
     </table>
