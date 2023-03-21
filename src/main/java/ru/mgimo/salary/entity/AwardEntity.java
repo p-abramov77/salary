@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -30,7 +31,7 @@ public class AwardEntity {
     }
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    Date date;
+    LocalDate date;
     @Min(value = 0, message = "Должен быть больше 0")
     float amount;
     String comment;
@@ -43,11 +44,11 @@ public class AwardEntity {
         this.employee = employeeEntity;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

@@ -1,12 +1,14 @@
 package ru.mgimo.salary.entity;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -21,9 +23,6 @@ public class EmployeeEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<AwardEntity> awardEntityList;
     @NotEmpty(message = "Не может быть пустым")
-    @Size(min = 3, max = 10, message = "Длина строки должна быть от 3 до 10 символов")
-    String tableNumber;
-    @NotEmpty(message = "Не может быть пустым")
     @Size(min = 8, max = 100, message = "Длина строки должна быть от 8 до 100 символов")
     String fullName;
     @NotEmpty(message = "Не может быть пустым")
@@ -36,16 +35,10 @@ public class EmployeeEntity {
     String maritalStatus;
     @Min(value = 0, message = "Больше или равен 0")
     int childAmount;
-    Date hireDate;
-    Date resignDate;
-
-    public String getTableNumber() {
-        return tableNumber;
-    }
-
-    public void setTableNumber(String tableNumber) {
-        this.tableNumber = tableNumber;
-    }
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    LocalDate hireDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    LocalDate resignDate;
 
     public String getFullName() {
         return fullName;
@@ -87,24 +80,24 @@ public class EmployeeEntity {
         this.childAmount = childAmount;
     }
 
-    public Date getHireDate() {
+    public LocalDate getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(Date hireDate) {
+    public void setHireDate(LocalDate hireDate) {
         this.hireDate = hireDate;
     }
 
-    public Date getResignDate() {
+    public LocalDate getResignDate() {
         return resignDate;
     }
 
-    public void setResignDate(Date resignDate) {
-        this.resignDate = resignDate;
+    public void setResignDate(String date) {
+        this.resignDate = Date.valueOf(date).toLocalDate();
     }
 
     public void setHireDate(String date) {
-        this.hireDate = Date.valueOf(date);
+        this.hireDate = Date.valueOf(date).toLocalDate();
     }
 
     public List<AbsenceEntity> getAbsenceEntityList() {

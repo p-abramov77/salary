@@ -24,12 +24,7 @@ public class AwardServiceImp implements AwardService {
 
     @Override
     public AwardEntity getAward(long id) {
-        Optional<AwardEntity> optional = awardRepo.findById(id);
-        if (optional.isPresent()) {
-            return optional.get();
-        } else {
-            return null;
-        }
+        return awardRepo.findById(id).orElse(null);
     }
 
     @Override

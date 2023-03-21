@@ -26,10 +26,6 @@
     <form class="w3-container w3-border w3-border-cyan" action="#" th:action="@{/salary/saveEmployee}" th:object="${employee}" method="POST">
         <input type="hidden" th:field="*{id}" />
         <p>
-            <label>Табельный номер</label>
-            <input class="w3-input w3-border"  type="text" th:field="*{tableNumber}" placeholder="Введите табельный номер"  value="" >
-            <label class="w3-red" th:if="${#fields.hasErrors('tableNumber')}" th:errors="*{tableNumber}">tableNumber Error</label>
-        <p>
             <label>Полное имя</label>
             <input class="w3-input w3-border"  type="text" th:field="*{fullName}" placeholder="Введите полное имя"  value="" >
             <label class="w3-red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">fullName Error</label>

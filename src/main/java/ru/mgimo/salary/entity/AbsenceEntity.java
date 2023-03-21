@@ -1,9 +1,11 @@
 package ru.mgimo.salary.entity;
 
 import lombok.Data;
+import org.hibernate.persister.entity.Loadable;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -17,9 +19,9 @@ public class AbsenceEntity {
     @JoinColumn(name = "employeeId", nullable = false)
     private EmployeeEntity employee;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    Date startDate;
+    LocalDate startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    Date finishDate;
+    LocalDate finishDate;
     boolean paid;
     String comment;
 
@@ -31,11 +33,11 @@ public class AbsenceEntity {
         this.employee = employee;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public Date getFinishDate() {
+    public LocalDate getFinishDate() {
         return finishDate;
     }
 
@@ -47,11 +49,11 @@ public class AbsenceEntity {
         return comment;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public void setFinishDate(Date finishDate) {
+    public void setFinishDate(LocalDate finishDate) {
         this.finishDate = finishDate;
     }
 

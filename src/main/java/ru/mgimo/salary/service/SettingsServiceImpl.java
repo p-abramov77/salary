@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import ru.mgimo.salary.entity.SettingsEntity;
 import ru.mgimo.salary.repository.SettingsRepo;
 
-import java.util.Optional;
-
 @Service
 public class SettingsServiceImpl implements SettingsService{
 
@@ -14,8 +12,7 @@ public class SettingsServiceImpl implements SettingsService{
     private SettingsRepo settingsRepo;
     @Override
     public SettingsEntity readSettings() {
-        Optional< SettingsEntity > optional = settingsRepo.findById(1L);
-        return optional.orElse(null);
+        return settingsRepo.findById(1L).orElse(null);
     }
 
     @Override

@@ -9,10 +9,57 @@
 <body>
 <div class="w3-container w3-border">
     <div class="w3-container w3-dark">
-        <h1>Вывод ведомости</h1>
+        <h1>
+            <span>Вывод ведомости за </span>
+            <span class="w3-input"  type="text" th:text="${monthYear}"></span>
+        </h1>
     </div>
 
     <a class="w3-btn w3-blue w3-round-large" href="/salary/main">Вернуться на главную страницу</a>
+
+    <table border="1" class = "w3-table-all w3-bordered w3-striped w3-border test w3-hoverable">
+        <thead>
+        <tr>
+            <th colspan="10">
+
+                <input type="date" id="date" name="date" th:attr="value=${date}">
+                <p>
+                    <button id="button" class="w3-btn w3-border w3-round-large"> Нажмите для формирования ведомости </button>
+                    <script>
+                    button.onclick = function() {
+                       window.location.href = "?date=" + document.getElementById("date").value;
+                    };
+                </script>
+
+                <p>
+            </th>
+        </tr>
+        <tr>
+            <th>Полное имя</th>
+            <th>Оклад</th>
+            <th>Отработанные дни</th>
+            <th>Отсутствие</th>
+            <th>Больничный</th>
+            <th>Надбавки</th>
+            <th>Зарплата</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row : ${list}">
+
+            <td th:text="${row.fullName}"></td>
+            <td th:text="${row.wage}"></td>
+            <td th:text="${row.workingDays}"></td>
+            <td th:text="${row.absenceDays}"></td>
+            <td th:text="${row.sickDays}"></td>
+            <td th:text="${row.awardSum}"></td>
+            <td th:text="${row.salary}"></td>
+
+          </tr>
+        </tbody>
+    </table>
+
+
 </div>
 </body>
 </html>

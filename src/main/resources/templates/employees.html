@@ -22,7 +22,7 @@
   <table border="1" class = "w3-table-all w3-bordered w3-striped w3-border test w3-hoverable">
     <thead>
     <tr>
-      <th colspan="10">
+      <th colspan="9">
 
         <input type="text" id="name" name="name" th:attr="value=${name}" placeholder="Введите сюда часть имени (если не заполнено, ищутся все имеющиеся)" class="w3-input">
         <p>
@@ -38,7 +38,6 @@
       </th>
     </tr>
     <tr>
-      <th>Табельный номер</th>
       <th>Полное имя</th>
       <th>Должность</th>
       <th>Оклад</th>
@@ -48,7 +47,6 @@
     </thead>
     <tbody>
     <tr th:each="employee : ${employees}">
-      <td th:text="${employee.tableNumber}"></td>
       <td th:text="${employee.fullName}"></td>
       <td th:text="${employee.position}"></td>
       <td th:text="${employee.wage}"></td>

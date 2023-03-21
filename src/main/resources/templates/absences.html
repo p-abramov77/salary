@@ -50,8 +50,8 @@
     </thead>
     <tbody>
     <tr th:each="absence : ${absences}">
-      <td th:text="${#dates.format(absence.startDate,'dd-MM-yyyy')}"></td>
-      <td th:text="${#dates.format(absence.finishDate,'dd-MM-yyyy')}"></td>
+      <td th:text="${absence.startDate}"></td>
+      <td th:text="${absence.finishDate}"></td>
       <td th:text="${absence.paid} ? 'Да' : '' "></td>
       <td th:text="${absence.comment}"></td>
       <td><a th:href="@{/salary/editAbsence/{id}(id=${absence.id})}" class="w3-btn w3-indigo w3-border w3-round-large ">Изменить</a></td>

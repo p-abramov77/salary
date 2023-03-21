@@ -73,7 +73,7 @@ public class SalaryController {
     @GetMapping("newEmployee")
     public String newEmployee(Model model) {
         EmployeeEntity employeeEntity = new EmployeeEntity();
-        employeeEntity.setHireDate(Date.valueOf(LocalDate.now()));
+        employeeEntity.setHireDate(Date.valueOf(LocalDate.now()).toLocalDate());
         model.addAttribute("employee", employeeEntity);
         return "employee";
     }
@@ -204,18 +204,6 @@ public class SalaryController {
 
         return "redirect:/salary/awards/" + awardEntity.getEmployeeEntity().getId();
     }
-    @GetMapping ("list")
-    public String payList() {
-        List<EmployeeEntity> employeeEntityList = employeeService.listEmployee("");
-        for ( EmployeeEntity employee : employeeEntityList ) {
-            System.out.println("===================================================");
-            System.out.println(employee);
-            List<AbsenceEntity> absenceEntityList = employee.getAbsenceEntityList();
-            for(AbsenceEntity absence : absenceEntityList){
-                System.out.println(absence);
-            }
-        }
-        return "list";
-    }
+
 
 }

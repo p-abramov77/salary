@@ -25,12 +25,7 @@ public class AbsenceServiceImp implements AbsenceService {
 
     @Override
     public AbsenceEntity getAbsence(long id) {
-        Optional<AbsenceEntity> optional = absenceRepo.findById(id);
-        if (optional.isPresent()) {
-            return optional.get();
-        } else {
-            return null;
-        }
+        return absenceRepo.findById(id).orElse(null);
     }
 
     @Override

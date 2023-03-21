@@ -49,7 +49,7 @@
         </thead>
         <tbody>
         <tr th:each="award : ${awards}">
-            <td th:text="${#dates.format(award.date,'dd-MM-yyyy')}"></td>
+            <td th:text="${award.date}"></td>
             <td th:text="${award.amount}"></td>
             <td th:text="${award.comment}"></td>
             <td><a th:href="@{/salary/editAward/{id}(id=${award.id})}" class="w3-btn w3-indigo w3-border w3-round-large ">Изменить</a></td>
