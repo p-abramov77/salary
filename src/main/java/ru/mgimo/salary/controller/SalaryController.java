@@ -1,9 +1,11 @@
 package ru.mgimo.salary.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.BindException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ru.mgimo.salary.entity.AbsenceEntity;
 import ru.mgimo.salary.entity.AwardEntity;
@@ -13,6 +15,7 @@ import ru.mgimo.salary.service.AbsenceServiceImp;
 import ru.mgimo.salary.service.AwardServiceImp;
 import ru.mgimo.salary.service.EmployeeServiceImpl;
 import ru.mgimo.salary.service.SettingsServiceImpl;
+import ru.mgimo.salary.validation.DateValidation;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
@@ -33,6 +36,8 @@ public class SalaryController {
     private AbsenceServiceImp absenceService;
     @Autowired
     private AwardServiceImp awardService;
+    @Autowired
+    DateValidation dateValidation;
     @PostConstruct
     public void postConstruct() {
         SettingsEntity settingsEntity = settingsService.readSettings();
@@ -130,8 +135,19 @@ public class SalaryController {
         return "absence";
     }
     @PostMapping("saveAbsence")
-    public String saveAbsence(@ModelAttribute("absence") @Valid AbsenceEntity absenceEntity,
+    public String saveAbsence(Model model, @ModelAttribute("absence") @Valid AbsenceEntity absenceEntity,
                                      BindingResult bindingResult) {
+        if (dateValidation.isPeriodCrossedWithEachOther(absenceEntity)) {
+            model.addAttribute("errorMessage", "Период пересекается с ранее введенными периодами");
+            model.addAttribute("name", absenceEntity.getEmployee().getFullName());
+            return "absence";
+        }
+        if (!dateValidation.isPeriod(absenceEntity)) {
+            model.addAttribute("errorMessage", "Начало периода превышает конец периода");
+            model.addAttribute("name", absenceEntity.getEmployee().getFullName());
+            return "absence";
+        }
+
         if(bindingResult.hasErrors()) {
             return "absence";
         }

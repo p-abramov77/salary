@@ -94,7 +94,7 @@ public class ListController {
                     .stream()
                     .filter(x -> !(x.getStartDate().isAfter(empFinish) && x.getFinishDate().isBefore(empStart)) )
                     .collect(Collectors.toList());
-            for(AbsenceEntity absence : absenceEntityList){
+            for(AbsenceEntity absence : absenceEntityList) {
                 System.out.println(absence);
                 for (int add = 0; absence.getStartDate().plusDays(add).isBefore(absence.getFinishDate().plusDays(1L)); add++ ) {
                     if(days.containsKey(absence.getStartDate().plusDays(add))) {

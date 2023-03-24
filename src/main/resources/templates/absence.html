@@ -23,6 +23,8 @@
   <p>
     <label>Сотрудник</label>
     <label class="w3-input"  type="text" th:text="${name}"></label>
+  <p>
+    <label class="w3-red" th:if="${errorMessage}" th:text="${errorMessage}"></label>
 
 
   <form class="w3-container w3-border w3-border-cyan" action="#" th:action="@{/salary/saveAbsence}" th:object="${absence}" method="POST">
@@ -31,12 +33,12 @@
 
     <p>
       <label>Начало периода отсутствия</label>
-      <input class="w3-input w3-border"  type="date" th:field="*{startDate}" placeholder="Введите начальную дату отсутствия" value="" >
+      <input class="w3-border"  type="date" th:field="*{startDate}" placeholder="Введите начальную дату отсутствия" value="" >
 <!--      <input class="w3-input w3-border"  type="date" th:field="#dates.format(*{startDate}, 'dd-MMM-yyyy')}" placeholder="Введите начальную дату отсутствия" value="" >-->
       <label class="w3-red" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">startDate Error</label>
     <p>
       <label>Конец периода отсутствия</label>
-      <input class="w3-input w3-border"  type="date" th:field="*{finishDate}" placeholder="Введите конечную дату отсутствия" value="" >
+      <input class="w3-border"  type="date" th:field="*{finishDate}" placeholder="Введите конечную дату отсутствия" value="" >
       <label class="w3-red" th:if="${#fields.hasErrors('finishDate')}" th:errors="*{finishDate}">finishDate Error</label>
     <p>
       <input type="checkbox" th:field="*{paid}" value="true" />
