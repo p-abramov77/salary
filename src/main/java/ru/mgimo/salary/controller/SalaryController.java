@@ -137,8 +137,8 @@ public class SalaryController {
     @PostMapping("saveAbsence")
     public String saveAbsence(Model model, @ModelAttribute("absence") @Valid AbsenceEntity absenceEntity,
                                      BindingResult bindingResult) {
-        if (dateValidation.isPeriodCrossedWithEachOther(absenceEntity)) {
-            model.addAttribute("errorMessage", "Период пересекается с ранее введенными периодами");
+        if (! dateValidation.isPeriodCrossedWithEachOther(absenceEntity).isEmpty()) {
+            model.addAttribute("errorMessage", dateValidation.isPeriodCrossedWithEachOther(absenceEntity));
             model.addAttribute("name", absenceEntity.getEmployee().getFullName());
             return "absence";
         }

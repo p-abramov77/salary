@@ -26,6 +26,10 @@
     <form class="w3-container w3-border w3-border-cyan" action="#" th:action="@{/salary/saveEmployee}" th:object="${employee}" method="POST">
         <input type="hidden" th:field="*{id}" />
         <p>
+            <label>Дата приема на работу</label>
+            <input class="w3-border"  type="date" th:field="*{hireDate}" placeholder="Введите дату приема на работу" value="" >
+            <label class="w3-red" th:if="${#fields.hasErrors('hireDate')}" th:errors="*{hireDate}">hireDate Error</label>
+        <p>
             <label>Полное имя</label>
             <input class="w3-input w3-border"  type="text" th:field="*{fullName}" placeholder="Введите полное имя"  value="" >
             <label class="w3-red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">fullName Error</label>
@@ -45,10 +49,6 @@
             <label>Количество детей</label>
             <input class="w3-input w3-border"  type="number" th:field="*{childAmount}" placeholder="Введите количество детей" value="" >
             <label class="w3-red" th:if="${#fields.hasErrors('childAmount')}" th:errors="*{childAmount}">childAmount Error</label>
-        <p>
-            <label>Дата приема на работу</label>
-            <input class="w3-input w3-border"  type="date" th:field="*{hireDate}" placeholder="Введите дату приема на работу" value="" >
-            <label class="w3-red" th:if="${#fields.hasErrors('hireDate')}" th:errors="*{hireDate}">hireDate Error</label>
         <p>
             <button class="w3-btn w3-indigo w3-border w3-round-large" type="submit"> Сохранить </button>
         <p>

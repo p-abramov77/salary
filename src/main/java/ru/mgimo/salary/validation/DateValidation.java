@@ -11,7 +11,7 @@ import java.util.List;
 public class DateValidation {
     @Autowired
     AbsenceServiceImp absenceService;
-    public boolean isPeriodCrossedWithEachOther(AbsenceEntity absenceNew) {
+    public String isPeriodCrossedWithEachOther(AbsenceEntity absenceNew) {
         List<AbsenceEntity> absenceEntityList = absenceService.listAbsence(absenceNew.getEmployee().getId());
         for(AbsenceEntity absence : absenceEntityList) {
             if(absenceNew.getId() != null
@@ -20,9 +20,9 @@ public class DateValidation {
             if( ! ( absenceNew.getStartDate().isAfter(absence.getFinishDate())
                     ||
                     absenceNew.getFinishDate().isBefore(absence.getStartDate())))
-                return true;
+                return "Пересекается с периодом (" + absence.getStartDate() + " , " + absence.getFinishDate() + ")";
         }
-        return false;
+        return "";
     }
     public boolean isPeriod(AbsenceEntity absenceNew) {
         return absenceNew.getStartDate().isBefore(absenceNew.getFinishDate().plusDays(1L));

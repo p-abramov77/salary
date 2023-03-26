@@ -27,7 +27,7 @@
     <input type="hidden" th:field="*{hireDate}" />
     <p>
       <label>Дата увольнения</label>
-      <input class="w3-input w3-border"  type="date" th:field="*{resignDate}" placeholder="Введите дату увольнения" value="" >
+      <input class="w3-border"  type="date" th:field="*{resignDate}" placeholder="Введите дату увольнения" value="" >
       <label class="w3-red" th:if="${#fields.hasErrors('resignDate')}" th:errors="*{resignDate}">resignDate Error</label>
     <p>
       <button class="w3-btn w3-red w3-border w3-round-large" type="submit"> Уволить </button>

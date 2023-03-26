@@ -32,7 +32,7 @@ public class AwardEntity {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate date;
-    @Min(value = 0, message = "Должен быть больше 0")
+    @Min(value = 1, message = "Должен быть больше 0")
     float amount;
     String comment;
 

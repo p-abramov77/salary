@@ -10,8 +10,7 @@
 <div class="w3-container w3-border">
     <div class="w3-container w3-dark">
         <h1>
-            <span>Вывод ведомости за </span>
-            <span class="w3-input"  type="text" th:text="${monthYear}"></span>
+            <p>Вывод ведомости за <label type="text" th:text="${monthYear}"></label> </p>
         </h1>
     </div>
 
@@ -39,7 +38,7 @@
             <th>Оклад</th>
             <th>Отработанные дни</th>
             <th>Отсутствие</th>
-            <th>Больничный</th>
+            <th>из них больничный</th>
             <th>Надбавки</th>
             <th>Зарплата</th>
         </tr>
@@ -48,12 +47,12 @@
         <tr th:each="row : ${list}">
 
             <td th:text="${row.fullName}"></td>
-            <td th:text="${row.wage}"></td>
+            <td th:text="${#numbers.formatDecimal(row.wage, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
             <td th:text="${row.workingDays}"></td>
             <td th:text="${row.absenceDays}"></td>
             <td th:text="${row.sickDays}"></td>
-            <td th:text="${row.awardSum}"></td>
-            <td th:text="${row.salary}"></td>
+            <td th:text="${#numbers.formatDecimal(row.awardSum, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+            <td th:text="${#numbers.formatDecimal(row.salary, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
 
           </tr>
         </tbody>

@@ -54,8 +54,8 @@
       <td th:text="${absence.finishDate}"></td>
       <td th:text="${absence.paid} ? 'Да' : '' "></td>
       <td th:text="${absence.comment}"></td>
-      <td><a th:href="@{/salary/editAbsence/{id}(id=${absence.id})}" class="w3-btn w3-indigo w3-border w3-round-large ">Изменить</a></td>
-      <td><a th:href="@{/salary/deleteAbsence/{id}(id=${absence.id})}" class="w3-btn w3-indigo w3-border w3-round-large">Удалить</a></td>
+      <td><a th:href="@{/salary/editAbsence/{id}(id=${absence.id})}" class="w3-btn w3-green w3-border w3-round-large ">Изменить</a></td>
+      <td><a th:href="@{/salary/deleteAbsence/{id}(id=${absence.id})}" class="w3-btn w3-red w3-border w3-round-large">Удалить</a></td>
     </tr>
     </tbody>
   </table>

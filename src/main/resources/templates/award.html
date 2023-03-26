@@ -31,7 +31,7 @@
 
     <p>
       <label>Дата выплаты</label>
-      <input class="w3-input w3-border"  type="date" th:field="*{date}" placeholder="Введите дату выплаты" value="" >
+      <input class="w3-border"  type="date" th:field="*{date}" placeholder="Введите дату выплаты" value="" >
       <label class="w3-red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">date Error</label>
     <p>
       <label>Сумма</label>

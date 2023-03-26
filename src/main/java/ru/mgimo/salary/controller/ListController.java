@@ -49,7 +49,7 @@ public class ListController {
         SettingsEntity settings = settingsService.readSettings();
 
         LocalDate localDate = tryToConvert(date);
-        String monthYear = localDate.getMonth().toString() + " " + localDate.getYear();
+        String monthYear = localDate.getMonth().getValue() + "/" + localDate.getYear();
         model.addAttribute("monthYear", monthYear);
 
         List<ListDAO> list = new ArrayList<>();

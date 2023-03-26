@@ -2,6 +2,7 @@ package ru.mgimo.salary.entity;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -88,16 +89,18 @@ public class EmployeeEntity {
         this.hireDate = hireDate;
     }
 
+    public void setHireDate(String date) {
+        this.hireDate = Date.valueOf(date).toLocalDate();
+    }
+
+    public void setResignDate(LocalDate resignDate) { this.resignDate = resignDate;  }
+
     public LocalDate getResignDate() {
         return resignDate;
     }
 
     public void setResignDate(String date) {
         this.resignDate = Date.valueOf(date).toLocalDate();
-    }
-
-    public void setHireDate(String date) {
-        this.hireDate = Date.valueOf(date).toLocalDate();
     }
 
     public List<AbsenceEntity> getAbsenceEntityList() {
