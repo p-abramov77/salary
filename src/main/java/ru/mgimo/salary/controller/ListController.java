@@ -1,11 +1,13 @@
 package ru.mgimo.salary.controller;
 
+import org.springdoc.core.SpringDocUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import ru.mgimo.salary.entity.AbsenceEntity;
 import ru.mgimo.salary.entity.AwardEntity;
 import ru.mgimo.salary.entity.EmployeeEntity;
@@ -23,13 +25,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static jdk.nashorn.internal.objects.NativeMath.max;
-import static jdk.nashorn.internal.objects.NativeMath.pow;
-
 @Controller
 @RequestMapping("/salary")
 public class ListController {
-
+    static {
+        SpringDocUtils.getConfig().addRestControllers(ListController.class);
+    }
     @Autowired
     private SettingsServiceImpl settingsService;
     @Autowired

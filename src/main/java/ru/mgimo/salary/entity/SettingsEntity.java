@@ -1,5 +1,6 @@
 package ru.mgimo.salary.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -18,9 +19,11 @@ public class SettingsEntity {
 
     @Min(value = 0, message = "Должен быть больше или равен 0")
     @Max(value = 100, message = "Должен быть меньше или равен 100")
+    @Schema(description = "Подоходный налог")
     private float taxRate;
     @Min(value = 0, message = "Должен быть больше или равен 0")
     @Max(value = 100, message = "Должен быть меньше или равен 100")
+    @Schema(description = "Процент выплаты по нетрудноспособности")
     private float sickPercent;
 
     public float getTaxRate() {
