@@ -1,5 +1,7 @@
 package ru.mgimo.salary.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.SpringDocUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
-
+@Tag(name = "Контроллер для работы с зарплатной ведомостью")
 @Controller
 @RequestMapping("/salary")
 public class ListController {
@@ -40,6 +42,7 @@ public class ListController {
     @Autowired
     private AwardServiceImp awardService;
 
+    @Operation(summary = "Страница зарплатной ведомости", description = "Выдается ведомость за указанный месяц и год")
     @GetMapping("list")
     public String payList(Model model, @RequestParam(defaultValue = "") String date) {
         if (date.isEmpty()){

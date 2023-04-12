@@ -1,5 +1,7 @@
 package ru.mgimo.salary.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.SpringDocUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import ru.mgimo.salary.validation.DateValidation;
 
 import javax.validation.Valid;
 import java.util.List;
+@Tag(name = "Контроллер для работы с отсутствием сотрудников")
 @Controller
 @RequestMapping("/salary")
 public class AbsenceController {
@@ -25,6 +28,7 @@ public class AbsenceController {
     AbsenceServiceImp absenceService;
     @Autowired
     DateValidation dateValidation;
+    @Operation(summary = "Список периодов отсутствия сотрудника", description = "Выдается список периодов отсутствия сотрудника с номером id")
     @GetMapping("absenceDays/{id}")
     public String absenceDays(Model model, @PathVariable(value = "id") long employeeId) {
         List<AbsenceEntity> absenceEntityList = absenceService.listAbsence(employeeId);
@@ -34,6 +38,7 @@ public class AbsenceController {
         model.addAttribute("id", employeeId);
         return "absences";
     }
+    @Operation(summary = "Подготовка данных для формы об отсутствии сотрудника", description = "Подготовка данных для формы об отсутствии сотрудника")
     @GetMapping("newAbsence/{id}")
     public String newAbsence(Model model, @PathVariable(value = "id") long employeeId) {
         AbsenceEntity absenceEntity = new AbsenceEntity();
@@ -43,6 +48,7 @@ public class AbsenceController {
         model.addAttribute("absence", absenceEntity);
         return "absence";
     }
+    @Operation(summary = "Обработка запроса на сохранение данных об отсутствии сотрудника", description = "Обработка запроса на сохранение данных об отсутствии сотрудник")
     @PostMapping("saveAbsence")
     public String saveAbsence(Model model, @ModelAttribute("absence") @Valid AbsenceEntity absenceEntity,
                               BindingResult bindingResult) {
@@ -64,6 +70,7 @@ public class AbsenceController {
         // Показать пропущенные дни этого работниа
         return "redirect:/salary/absenceDays/" + absenceEntity.getEmployee().getId() ;
     }
+    @Operation(summary = "Обработка запроса на изменение данных об отсутствии сотрудника", description = "Обработка запроса на изменение данных об отсутствии сотрудник")
     @GetMapping("editAbsence/{id}")
     public String editAbsence(Model model, @PathVariable(value = "id") long id) {
         AbsenceEntity absenceEntity = absenceService.getAbsence(id);
@@ -75,6 +82,7 @@ public class AbsenceController {
         return "absence";
     }
 
+    @Operation(summary = "Обработка запроса на удаление данных об отсутствии сотрудника", description = "Обработка запроса на удаление данных об отсутствии сотрудник")
     @GetMapping("deleteAbsence/{id}")
     public String deleteAbsence(Model model, @PathVariable(value = "id") long id) {
         AbsenceEntity absenceEntity = absenceService.getAbsence(id);

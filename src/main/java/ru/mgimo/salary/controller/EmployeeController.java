@@ -1,5 +1,7 @@
 package ru.mgimo.salary.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.SpringDocUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+@Tag(name = "Контроллер для работы с данными сотрудников")
 @Controller
 @RequestMapping("/salary")
 public class EmployeeController {
@@ -23,6 +26,7 @@ public class EmployeeController {
     @Autowired
     EmployeeServiceImpl employeeService;
 
+    @Operation(summary = "Список сотрудников", description = "Выдается список сотрудников, ФИО котрых начинается с ...")
     @GetMapping ("employees")
     public String listEmployees(Model model, @RequestParam(defaultValue = "") String name) {
         List<EmployeeEntity> employees = employeeService.listEmployee(name);
@@ -30,6 +34,7 @@ public class EmployeeController {
         model.addAttribute("employees",employees);
         return "employees";
     }
+    @Operation(summary = "Подготовка формы для изменения данных сотрудника", description = "Подготовка формы для изменения данных сотрудника")
     @GetMapping("newEmployee")
     public String newEmployee(Model model) {
         EmployeeEntity employeeEntity = new EmployeeEntity();
@@ -37,6 +42,7 @@ public class EmployeeController {
         model.addAttribute("employee", employeeEntity);
         return "employee";
     }
+    @Operation(summary = "Обработка запроса на изменение данных сотрудника", description = "Обработка запроса на изменение данных сотрудника")
     @PostMapping("saveEmployee")
     public String saveEmployee(@ModelAttribute("employee") @Valid EmployeeEntity employeeEntity,
                                BindingResult bindingResult) {
@@ -48,12 +54,14 @@ public class EmployeeController {
         return "redirect:/salary/employees?name="; //+ StringEscapeUtils.escapeJava(employeeEntity.getFullName());
 
     }
+    @Operation(summary = "Подготовка формы для изменения данных сотрудника", description = "Подготовка формы для изменения данных сотрудника")
     @GetMapping("editEmployee/{id}")
     public String editEmployee(Model model, @PathVariable(value = "id") long id) {
         EmployeeEntity employeeEntity = employeeService.getEmployeeById(id);
         model.addAttribute("employee", employeeEntity);
         return "employee";
     }
+    @Operation(summary = "Подготовка формы для увольнения сотрудника", description = "Подготовка формы для увольнения сотрудника")
     @GetMapping("resignEmployee/{id}")
     public String resignEmployee(Model model, @PathVariable(value = "id") long id) {
         EmployeeEntity employeeEntity = employeeService.getEmployeeById(id);
@@ -61,6 +69,7 @@ public class EmployeeController {
         model.addAttribute("employee", employeeEntity);
         return "resign";
     }
+    @Operation(summary = "Сохраниение данных сотрудника", description = "Сохраниение данных сотрудника")
     @PostMapping("saveResignEmployee")
     public String saveResignEmployee(@ModelAttribute("employee") @Valid EmployeeEntity employeeEntity,
                                      BindingResult bindingResult) {
